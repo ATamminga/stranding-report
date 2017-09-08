@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "name: \"Aarons Tamminga\"\noutput_dir: \".\"\nnavbar:\n  title: \"Aaron Tamminga\"\n  left:\n    - text: \"Home\"\n      href: index.html\n    - text: \"Peace River studies\"\n      href: Stranding_report.html\noutput:\n  html_document:\n    theme: flatly",
+    "created" : 1504828518323.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2322107852",
+    "id" : "79CA3FF7",
+    "lastKnownWriteTime" : 1504828937,
+    "last_content_update" : 1504828937204,
+    "path" : "~/Documents/PostDoc/Fish_stranding/stranding-research/_site.yml",
+    "project_path" : "_site.yml",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}

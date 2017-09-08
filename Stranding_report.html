@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Applying a simple morphologic indicator of reach-scale elevation distribution to fish stranding risk in large regulated rivers</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Aaron Tamminga</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Stranding_report.html">Peace River studies</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Applying a simple morphologic indicator of reach-scale elevation distribution to fish stranding risk in large regulated rivers</h1>
+
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Characterizing and interpreting fluvial forms is a fundamental component of river research and management. High resolution, spatially continuous topographic information is becoming increasingly common, but appropriate methods and tools are needed to analyze and leverage it properly. In this paper, we test the applicability of the simple morphologic indicator of reach-scale elevation distributions proposed by <a href="http://onlinelibrary.wiley.com/wol1/doi/10.1002/2015WR017918/abstract">Redolfi et al. (2016)</a> to assess the morphology of Peace River, with a focus on differentiating reaches in terms of physical form and resultant hydraulics. We then extend the method to an analysis of fish stranding risk under changing flow levels by examining variability in wetted width between different reach morphologies. Results are compared with other conventional terrain analyses as well as detailed 2-dimensional flow model results for an overall evaluation of the utility of the morphologic indicator as a potential framework for stratification and monitoring on Peace River and other large regulated rivers.</p>
+</div>
+<div id="model-definition" class="section level2">
+<h2>Model definition</h2>
+<p>Redolfi et al. (2016) propose extending the traditional concept of a single transverse river cross section to a reach-scale “average cross section” considering the entire reach topography, inspired out of a desire to examine the key geomorphic drivers that set channel form by using a parsimonious, intuitive, purely geometric model. The approach is based on a frequency distribution of bed elevations (in a similar manner to hypsometric analyses often applied at a watershed scale) that integrates the spatial variability evident in topographically diverse single- and multi-thread rivers.</p>
+<p>Figures 1 demonstrates the definition of a reach-averaged width-depth <span class="math inline">\(b(D)\)</span> curve in a given section as put forward in Redolfi et al. (2016). Elevations below a given water surface stage are measured with respect to the lowest elevation in the section, and free surface widths are calculated for each elevation. The cumulative <span class="math inline">\(b(D)\)</span> curve can then be conveniently approximated with a power law fit <span class="math inline">\(b = kD^\alpha\)</span>, where <span class="math inline">\(k\)</span> defines the scale of the width and <span class="math inline">\(\alpha\)</span> characterizes the shape of the averaged cross section.</p>
+<p><img src="Redolfi_fig1.png" width="500px" /></p>
+<p><strong>Figure 1:</strong> [From Redolfi et al. (2016)] (a) Example of a single cross section with the definition of the width bx as a function of the elevation <span class="math inline">\(D\)</span> with respect to the lowest point; and (b) example of the reach-averaged <span class="math inline">\(b(D)\)</span> curve, obtained by integrating bx along a reach of length <span class="math inline">\(L\)</span>. The dashed line is the power law approximation of the curve; <span class="math inline">\(n\)</span> and <span class="math inline">\(h\)</span> indicate bed elevation and flow depth along the transverse direction <span class="math inline">\(y\)</span>.</p>
+<p><img src="Redolfi_fig2.png" width="600px" /></p>
+<p><strong>Figure 2:</strong> [From Redolfi et al. (2016)] Three characteristic cross-section types (left) and corresponding (middle) reach-scale <span class="math inline">\(b(D)\)</span> curves and (right) average section. (a) Concave upward shape; (b) triangular shape; (c) concave downward shape, with a indicating the exponent of the power law.</p>
+<p>Redolfi et al. (2016) focus on the utility of the <span class="math inline">\(\alpha\)</span> exponent of the power law fit as a key parameter or “morphologic indicator” that can differentiate the role of longitudinal slope, grain size, discharge, and vegetation or confinement effects on the morphology of rivers. Figure 2 portrays several channel morphology archetypes, their dissolution into <span class="math inline">\(b(D)\)</span> curves, and their representations as statistically averaged cross sections, each with <span class="math inline">\(\alpha\)</span> values reflecting different topographic complexities. Through their analysis, the authors demonstrate the indicator’s potential applications to estimates of reach-averaged shear stress distributions, bedload flux, and at-a-station variability in wetted width, achieved by using the spatially averaged section as the topographic boundary condition for a simple uniform flow model.</p>
+<p>Given the simplicity of the model and the wide range of geomorphic and hydraulic extensions, it is useful to test as a descriptor of channel form on a large regulated river like the Peace. Objectively classified reach morphologies could potentially be integrated into sampling efforts and applied at any scale of interest. This understanding of geomorphic forms can then be used as a hierarchical framework for interpreting and spatial scaling/extrapolation of river monitoring studies including fish hydraulic habitat availibility, fish stranding risk during flow reductions, or assessments of longer-term geomorphic adjustments. In this report, we demonstrate some initial applications of the approach to Peace River, outline future research directions, and address potential practical/logistical application issues or extensions.</p>
+</div>
+<div id="initial-results" class="section level2">
+<h2>Initial results</h2>
+<p>The morphologic indicator approach was first tested at a mainstem reach of Peace River downstream of Site C near the town of Old Fort. The topography of a five-kilometer reach (representing the pre dam construction configuration) was reconstructed with a combination of bare-earth LiDAR, manual GPS surveys and bathymetric sounding. Point values from disparate sources were merged and interpolated to a 10m raster, which was masked to only include elevations below the highest water level. The DEM was then detrended with respect to valley slope to highlight within-channel variability, and the reach was discretized into segments defined by polygons with along-channel lengths equivalent to approximately one channel width (Figure 3).</p>
+<p><img src="Stranding_report_files/figure-html/demfig-1.png" width="576" /></p>
+<p><strong>Figure 3:</strong> Site C active channel DEM. Elevations are detrended and normalized relative to the lowest elevation in the reach. Sample polygons are overlain.</p>
+<p><img src="Stranding_report_files/figure-html/fits-1.png" width="576" /></p>
+<p><strong>Figure 4:</strong> Average section <span class="math inline">\(b(D)\)</span> curves, showing both the empirical distribution of elevations (solid, colored lines) and the fitted power law approximations (dotted lines).</p>
+<p>The results from the</p>
+<p><img src="Stranding_report_files/figure-html/averages-1.png" width="576" /></p>
+<p><strong>Figure 5:</strong> Power law fits for average sections from three geomorphically distinct reaches on Peace River.</p>
+</div>
+<div id="scalesampling-issues" class="section level2">
+<h2>Scale/sampling issues</h2>
+<p>What length of average section?<br />
+Does characterizing the entire cross section tell us enough about the area between the high and low water lines, which is really all that matters in this case?</p>
+</div>
+<div id="potential-extensions" class="section level2">
+<h2>Potential extensions</h2>
+<p>There are lots of potential ties to geomorphic theory, can link to hydraulic geometry etc<br />
+Validation/verification with real stranding data<br />
+Comparisons to other systems in BC (with stranding data)<br />
+Do the completed channel enhancements downstream of show up in this sort of a measure?<br />
+FREEBIRD or other optical bathymetric mappping as a means of getting depths (kind of an inverse DEM) and applying this sort of approach.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+---
+title: Applying a simple morphologic indicator of reach-scale elevation distribution
+  to fish stranding risk in large regulated rivers
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE,
+                      warning=FALSE,
+                      error=FALSE, 
+                      message=FALSE,
+                      cache=TRUE, 
+                      width = 8,
+                      fig.width = 6,
+                      fig.height = 4)
+
+library(raster)
+library(rgeos)
+library(akima)
+library(rgdal)
+library(sp)
+library(maptools)
+library(gstat)
+library(rasterVis)
+library(gridExtra)
+library(dplyr)
+library(ggplot2)
+library(grid)
+library(scales)
+library(viridis)
+library(RColorBrewer)
+library(broom)
+library(parallel)
+
+
+source("stranding_functions.R")
+
+```
+
+## Introduction
+
+Characterizing and interpreting fluvial forms is a fundamental component of river research and management. 
+High resolution, spatially continuous topographic information is becoming increasingly common, but appropriate methods and tools are needed to analyze and leverage it properly. 
+In this paper, we test the applicability of the simple morphologic indicator of reach-scale elevation distributions proposed by [Redolfi et al. (2016)](http://onlinelibrary.wiley.com/wol1/doi/10.1002/2015WR017918/abstract) to assess the morphology of Peace River, with a focus on differentiating reaches in terms of physical form and resultant hydraulics. 
+We then extend the method to an analysis of fish stranding risk under changing flow levels by examining variability in wetted width between different reach morphologies. 
+Results are compared with other conventional terrain analyses as well as detailed 2-dimensional flow model results for an overall evaluation of the utility of the morphologic indicator as a potential framework for stratification and monitoring on Peace River and other large regulated rivers. 
+
+## Model definition
+
+Redolfi et al. (2016) propose extending the traditional concept of a single transverse river cross section to a reach-scale "average cross section" considering the entire reach topography, inspired out of a desire to examine the key geomorphic drivers that set channel form by using a parsimonious, intuitive, purely geometric model. The approach is based on a frequency distribution of bed elevations (in a similar manner to hypsometric analyses often applied at a watershed scale) that integrates the spatial variability evident in topographically diverse single- and multi-thread rivers. 
+
+Figures 1 demonstrates the definition of a reach-averaged width-depth $b(D)$ curve in a given section as put forward in Redolfi et al. (2016). Elevations below a given water surface stage are measured with respect to the lowest elevation in the section, and free surface widths are calculated for each elevation. The cumulative $b(D)$ curve can then be conveniently approximated with a power law fit $b = kD^\alpha$, where $k$ defines the scale of the width and $\alpha$ characterizes the shape of the averaged cross section. 
+
+```{r Redolfi1, out.width = "500px"}
+knitr::include_graphics("Redolfi_fig1.png")
+```
+
+**Figure 1:** [From Redolfi et al. (2016)] (a) Example of a single cross section with the definition of the width bx as a function of the elevation $D$ with respect to the lowest point; and (b) example of the reach-averaged $b(D)$ curve, obtained by integrating bx along a reach of length $L$. The dashed line is the power law approximation of the curve; $n$ and $h$ indicate bed elevation and flow depth along the transverse direction $y$.
+
+```{r Redolfi2, out.width = "600px"}
+knitr::include_graphics("Redolfi_fig2.png")
+```
+
+**Figure 2:** [From Redolfi et al. (2016)] Three characteristic cross-section types (left) and corresponding (middle) reach-scale $b(D)$ curves and (right) average section. (a) Concave upward shape; (b) triangular shape; (c) concave downward shape, with a indicating the exponent of the power law. 
+
+Redolfi et al. (2016) focus on the utility of the $\alpha$ exponent of the power law fit as a key parameter or "morphologic indicator" that can differentiate the role of longitudinal slope, grain size, discharge, and vegetation or confinement effects on the morphology of rivers. Figure 2 portrays several channel morphology archetypes, their dissolution into $b(D)$ curves, and their representations as statistically averaged cross sections, each with $\alpha$ values reflecting different topographic complexities. Through their analysis, the authors demonstrate the indicator's potential applications to estimates of reach-averaged shear stress distributions, bedload flux, and at-a-station variability in wetted width, achieved by using the spatially averaged section as the topographic boundary condition for a simple uniform flow model. 
+
+Given the simplicity of the model and the wide range of geomorphic and hydraulic extensions, it is useful to test as a descriptor of channel form on a large regulated river like the Peace. Objectively classified reach morphologies could potentially be integrated into sampling efforts and applied at any scale of interest. This understanding of geomorphic forms can then be used as a hierarchical framework for interpreting and spatial scaling/extrapolation of river monitoring studies including fish hydraulic habitat availibility, fish stranding risk during flow reductions, or assessments of longer-term geomorphic adjustments. In this report, we demonstrate some initial applications of the approach to Peace River, outline future research directions, and address potential practical/logistical application issues or extensions. 
+
+## Initial results
+
+```{r dem, include = FALSE}
+old.fort.dem <- DetrendDEM(src.file = "BOTTOM-SiteC_Dam-Taylor.csv",
+                           map.bound = "OldFortClip.shp",
+                           water.poly = "12009 DIS70A_region.shp",
+                           cell.size = 10,
+                           dem.out = "old_fort_dem.tif")
+
+raspberry.dem <- DetrendDEM(src.file = "BOTTOM-Raspberry_Island.csv",
+                           map.bound = "RaspberryClip.shp",
+                           water.poly = "12009 DIS70A_region.shp",
+                           cell.size = 10,
+                           dem.out = "raspberry_dem.tif")
+
+pallings.dem <- DetrendDEM(src.file = "BOTTOM-Pallings_Flat.csv",
+                           map.bound = "PallingsClip.shp",
+                           water.poly = "12009 DIS70A_region.shp",
+                           cell.size = 10,
+                           dem.out = "pallings_dem.tif")
+```
+
+```{r elevranks, include = FALSE, cache=FALSE}
+old.fort.elevs <- RankElevs(dem.in = "old_fort_dem.tif", 
+                            map.bound = "OldFortClip.shp",
+                            n.sample = 6)
+raspberry.elevs <- RankElevs(dem.in = "raspberry_dem.tif", 
+                             map.bound = "RaspberryClip.shp",
+                             n.sample = 6)
+
+pallings.elevs <- RankElevs(dem.in = "pallings_dem.tif", 
+                            map.bound = "PallingsClip.shp",
+                            n.sample = 6)
+
+old.fort.figs <- PlotElevs(elevs.in = old.fort.elevs,
+                           map.bound = "OldFortClip.shp",
+                           water.poly  = "12009 DIS70A_region.shp")
+
+
+raspberry.figs <- PlotElevs(elevs.in = raspberry.elevs, 
+                            map.bound = "RaspberryClip.shp",
+                            water.poly = "12009 DIS70A_region.shp")
+
+pallings.figs <- PlotElevs(elevs.in = pallings.elevs,
+                           map.bound ="PallingsClip.shp",
+                           water.poly = "12009 DIS70A_region.shp")
+
+
+
+```
+
+The morphologic indicator approach was first tested at a mainstem reach of Peace River downstream of Site C near the town of Old Fort. The topography of a five-kilometer reach (representing the pre dam construction configuration) was reconstructed with a combination of bare-earth LiDAR, manual GPS surveys and bathymetric sounding. Point values from disparate sources were merged and interpolated to a 10m raster, which was masked to only include elevations below the highest water level. The DEM was then detrended with respect to valley slope to highlight within-channel variability, and the reach was discretized into  segments defined by polygons with along-channel lengths equivalent to approximately one channel width (Figure 3). 
+
+```{r demfig}
+old.fort.figs[[3]]
+```
+
+**Figure 3:** Site C active channel DEM. Elevations are detrended and normalized relative to the lowest elevation in the reach. Sample polygons are overlain. 
+
+```{r fits}
+old.fort.figs[[1]]
+```
+
+**Figure 4:** Average section $b(D)$ curves, showing both the empirical distribution of elevations (solid, colored lines) and the fitted power law approximations (dotted lines). 
+
+
+The results from the 
+
+```{r averages}
+
+old.fort.data <- do.call(rbind, simplify2array(old.fort.elevs)[1,]) %>% 
+  mutate(reach = "OldFort")
+pallings.data <- do.call(rbind, simplify2array(pallings.elevs)[1,]) %>% 
+  mutate(reach = "PallingsFlat")
+raspberry.data <- do.call(rbind, simplify2array(raspberry.elevs)[1,]) %>% 
+  mutate(reach = "RaspberryIslands")
+
+elevs.all <- rbind(old.fort.data, pallings.data, raspberry.data)
+
+  poly.colors <- brewer.pal(9, "Set1")
+
+
+elevs.all %>% 
+  ggplot()+
+  facet_wrap(~reach)+
+  geom_path(aes(x=model.fit, y = z, color = id))+
+  theme_bw()+
+  xlim(0, 1000)+
+    ylim(0, 10)+
+    xlab("b (width, m)")+
+    ylab("D (elev. above datum, m)")+
+    scale_color_manual("ID", values = poly.colors)+
+
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
+
+```
+
+**Figure 5:** Power law fits for average sections from three geomorphically distinct reaches on Peace River. 
+
+
+
+
+## Scale/sampling issues 
+What length of average section?  
+Does characterizing the entire cross section tell us enough about the area between the high and low water lines, which is really all that matters in this case? 
+
+## Potential extensions
+There are lots of potential ties to geomorphic theory, can link to hydraulic geometry etc  
+Validation/verification with real stranding data  
+Comparisons to other systems in BC (with stranding data)  
+Do the completed channel enhancements downstream of show up in this sort of a measure?  
+FREEBIRD or other optical bathymetric mappping as a means of getting depths (kind of an inverse DEM) and applying this sort of approach. 

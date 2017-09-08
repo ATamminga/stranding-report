@@ -1,0 +1,12 @@
+name: "Aarons Tamminga"
+output_dir: "."
+navbar:
+  title: "Aaron Tamminga"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Peace River studies"
+      href: Stranding_report.html
+output:
+  html_document:
+    theme: flatly
