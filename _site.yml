@@ -2,12 +2,9 @@ name: "Aarons Tamminga"
 output_dir: "."
 navbar:
   title: "Aaron Tamminga"
-  left:
+  right:
     - text: "Home"
-      href: index.html
-    - text: "Peace River studies"
-      href: Stranding_report.html
+      href: https://atamminga.github.io/index.html
 output:
   html_document:
-    theme: flatly
-    css: style.css
+    theme: lumen

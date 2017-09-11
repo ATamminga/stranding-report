@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -66,7 +66,6 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 
 </head>
 
@@ -98,34 +97,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 60px;
+  padding-top: 54px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 59px;
+  margin-top: -59px;
 }
 
 .section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 59px;
+  margin-top: -59px;
 }
 .section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 59px;
+  margin-top: -59px;
 }
 .section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 59px;
+  margin-top: -59px;
 }
 .section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 59px;
+  margin-top: -59px;
 }
 .section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
+  padding-top: 59px;
+  margin-top: -59px;
 }
 </style>
 
@@ -221,22 +220,28 @@ $(document).ready(function () {
 <p><strong>Figure 3:</strong> Site C active channel DEM. Elevations are detrended and normalized relative to the lowest elevation in the reach. Sample polygons are overlain.</p>
 <p><img src="Stranding_report_files/figure-html/fits-1.png" width="576" /></p>
 <p><strong>Figure 4:</strong> Average section <span class="math inline">\(b(D)\)</span> curves, showing both the empirical distribution of elevations (solid, colored lines) and the fitted power law approximations (dotted lines).</p>
-<p>The results from the</p>
+<p>The results from Figure 4 demonstrate the utility in the approach of hightlighting channel shape differences. Of the six average sections analyzed, there is significant variability in the shape of the empirical curves and the fitted power laws. Average sections with relatively high <span class="math inline">\(\alpha\)</span> values such as #1, #4, and #5 can be interpreted as having greater topographic complexity (in this case, produced largely by the presence of side channels) compared to more dominantly single-thread average sections such as #2, where <span class="math inline">\(\alpha\)</span> is close to 1, indicating a simpler V- or U-shaped channel.</p>
 <p><img src="Stranding_report_files/figure-html/averages-1.png" width="576" /></p>
 <p><strong>Figure 5:</strong> Power law fits for average sections from three geomorphically distinct reaches on Peace River.</p>
+<p>Comparing the geomorphic indicator approach between geographically separated reaches of Peace River also highlights potential geomorphic differences. In general, the Pallings Flat average sections exhibit the most topographic diversity and higher <span class="math inline">\(\alpha\)</span> values. This is likely indicative of the lower slope of the reach, with several average sections showing a flat, wide configuration that is likely to have a greater proportion of large zones at risk of being dewatered quickly and potentially stranding fish. The shape of the Raspberry Islands sections is more similar to the Old Fort/Site C reach with several V-shaped or U-shaped sections, although some areas with higher <span class="math inline">\(\alpha\)</span> exponents (e.g. average section #3) are still present. More detailed analysis of the individual sections and the general controls on reach morphology on Peace River is needed to dig into the specifics, but at present, the geomorphic indicator approach seems to provide a useful framework within which to interpret channel hydrogeomorphology.</p>
 </div>
 <div id="scalesampling-issues" class="section level2">
 <h2>Scale/sampling issues</h2>
-<p>What length of average section?<br />
-Does characterizing the entire cross section tell us enough about the area between the high and low water lines, which is really all that matters in this case?</p>
+<p>The analysis presented herein is based on code implemented in R that was created with flexibility and reproducibility in mind. This facilitates easy restructuring and reapplication for the purposes of addressing issues such as scale and sampling resolution, for example. Future analysis will therefore be able to easily include assessments/sensitivity analyses of the influence of scales of application (e.g., what is the most appropriate length of average section, what is the influence of DEM raster resolution). Results can also be compared with information collected from traditional field-based transect elevation and ADCP surveys.</p>
 </div>
-<div id="potential-extensions" class="section level2">
-<h2>Potential extensions</h2>
-<p>There are lots of potential ties to geomorphic theory, can link to hydraulic geometry etc<br />
-Validation/verification with real stranding data<br />
-Comparisons to other systems in BC (with stranding data)<br />
-Do the completed channel enhancements downstream of show up in this sort of a measure?<br />
-FREEBIRD or other optical bathymetric mappping as a means of getting depths (kind of an inverse DEM) and applying this sort of approach.</p>
+<div id="future-directions-and-open-questions" class="section level2">
+<h2>Future directions and open questions</h2>
+<ul>
+<li>Comparison with 2D hydrodynamic models at each reach to address whether dewatered areas are more common in reaches or average sections with greater <span class="math inline">\(\alpha\)</span> values.</li>
+<li>Does characterizing the entire cross section tell us enough about the area between the high and low water lines, which is really all that matters in a fish stranding context?</li>
+<li>Do constructed channel enhancements/bar shaping create a change in signal that shows up in this sort of analysis?</li>
+<li>Ties to hydraulic geometry (how can the method relate to at-a-station variability in wetted width, width/depth ratio, and bedload flux?)</li>
+<li>Extensions to long-term geomorphic regime adjustments ongoing on Peace River</li>
+<li>FREEBIRD or similar optical bathymetric mapping as a means of getting continuous river depths (sort of an inverse DEM) and applying this sort of approach.</li>
+<li>Inclusion of other terrain analysis methods (e.g. flow routing, simple slope-based metrics) as alternative approaches or as a way of briding a scale gap between average section classification and identification of specific spatial sites with high stranding risk.</li>
+<li>Comparisons to other systems in British Columbia (Columbia, Kootenay, Duncan rivers?</li>
+<li>Verification with actual fish stranding data.</li>
+</ul>
 </div>
 
 
