@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "name: \"Aaron Tamminga\"\noutput_dir: \".\"\nnavbar:\n  title: \"Aaron Tamminga\"\n  href: https://atamminga.github.io/index.html\n  right:\n    - text: \"Home\"\n      href: https://atamminga.github.io/index.html\noutput:\n  html_document:\n    theme: lumen",
+    "created" : 1506546158666.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2347128193",
+    "id" : "479C0A15",
+    "lastKnownWriteTime" : 1506546162,
+    "last_content_update" : 1506546162295,
+    "path" : "~/Documents/PostDoc/Fish_stranding/stranding-research/_site.yml",
+    "project_path" : "_site.yml",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}

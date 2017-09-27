@@ -1,7 +1,8 @@
-name: "Aarons Tamminga"
+name: "Aaron Tamminga"
 output_dir: "."
 navbar:
   title: "Aaron Tamminga"
+  href: https://atamminga.github.io/index.html
   right:
     - text: "Home"
       href: https://atamminga.github.io/index.html
